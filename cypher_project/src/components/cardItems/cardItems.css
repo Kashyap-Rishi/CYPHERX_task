@@ -1,10 +1,10 @@
 .main-container{
-   max-width: 240px;
+ 
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.8rem 1.2rem;
-    width: 100%;
+ 
     border-radius: 6px;
     background-color: #ffff;
     box-shadow: 0px 0px 8px 0px #0000001a;
@@ -60,6 +60,12 @@
     border-radius: 3px;
     padding: 1px 5px;
 }
-
+.sub-hd-logo{
+    font-size: 0.7em;
+    background-color: rgb(235, 72, 72);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+}
 
 
