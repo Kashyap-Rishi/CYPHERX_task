@@ -1,8 +1,8 @@
 .main-card-header{
     display: flex;
- padding: 0 2%;
- gap:2em;
- 
+ padding: 2% 2%;
+ gap:1em;
+ font-family: "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
  
 }
 
@@ -14,6 +14,7 @@
 }
 .sub-main-head{
     width:20%;
+   
  
 }
 .hd-icons{
@@ -26,4 +27,11 @@
     font-weight: 600;
     color: #373737;
 
+}
+
+.sub-main-item{
+   padding: 2% 0;
+}
+.cnt{
+    color:gray;
 }
