@@ -1,4 +1,21 @@
+.parent-cont{
+     background-color: #F4F5F8;
+
+}
+
+.nav-head{
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+}
+
+
+
+
+
+
 .main-card-header{
+ 
     display: flex;
  padding: 2% 2%;
  gap:1em;
@@ -9,6 +26,7 @@
 .sub-main-title{
   justify-content: space-between;
     display: flex;
+    padding-bottom: 15px;
     
     
 }
@@ -34,4 +52,13 @@
 }
 .cnt{
     color:gray;
+}
+
+.usr-symb{
+    font-size: 0.7em;
+    background-color: rgb(235, 72, 72);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    margin: 0 5px;
 }

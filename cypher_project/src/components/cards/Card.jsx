@@ -25,7 +25,7 @@ const Card = () => {
 
     // Sorting
     if (sortingOption === 'priority') {
-      adjustedTickets.sort((a, b) => a.priority - b.priority);
+      adjustedTickets.sort((a, b) => b.priority - a.priority);
     } else if (sortingOption === 'title') {
       adjustedTickets.sort((a, b) => a.title.localeCompare(b.title));
     }
@@ -114,8 +114,39 @@ const Card = () => {
         return null;
         }
       };
+      const getPriorityIcon=(priorityStage)=>{
+        console.log(priorityStage);
+        switch(priorityStage){
+          case 0:
+            return(
+      <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','margin':'0 5px -2px 5px'}}><path d="M112 476h160v72H112zm320 0h160v72H432zm320 0h160v72H752z"></path></svg>
+            );
+      
+            case 1:
+              return(
+      <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','margin':'0 5px -2px 5px'}}><path d="M2 20h.01"></path><path d="M7 20v-4"></path></svg>
+                      );
+      
+              case 2:
+                return(
+      <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','margin':'0 5px -2px 5px'}}><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path></svg>
+                        );
+      
+                case 3:
+                  return(
+                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'style':'gray','margin':'0 5px -2px 5px'}}><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path></svg>
+                          );
+      
+                  case 4:
+                    return(
+                      <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color': 'rgb(245, 138, 66)','margin':'0 5px -2px 5px'}}><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path></svg>
+                            );
+        }
+      }
   return (
-    <div>
+    <div className="parent-cont">
+    <div className="nav-head">
+    <div className="btn-display">
       <button onClick={toggleOptions}>Display Options</button>
 
       {showOptions && (
@@ -136,33 +167,37 @@ const Card = () => {
             </select>
           </div>
         </div>
+      
       )}
+      </div>
+      <div className="dark_mode"><svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"></path></svg></div>
+      </div>
 
       <div className="main-card-header">
         {groupingOption === 'user' &&
           data.users.map((user) => (
             <div key={user.id} className="sub-main-head">
             <div className="sub-main-title">
-            <div>
+            <div >
            
             
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','margin':'0 5px -3px 0'}}><path d="M112 476h160v72H112zm320 0h160v72H432zm320 0h160v72H752z"></path></svg>
+              <span className="usr-symb">{user.name.split('')[0]}</span>
             
-              {user.name} {displayedTickets[user.id] ? displayedTickets[user.id].length : 0} 
+              <span className="st-title">{user.name}</span> <span className="cnt">{displayedTickets[user.id] ? displayedTickets[user.id].length : 0} </span>
               </div>
               <div className="hd-icons">
                  <div className="icon-wrap">
-                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray'}}><path fill="none" d="M0 0h24v24H0z"></path><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>
+                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','marginRight':'5px'}}><path fill="none" d="M0 0h24v24H0z"></path><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>
                  </div>
                  <div className="icon-wrap">
-                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray'}}><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path></svg>
+                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','marginRight':'5px'}}><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path></svg>
                  </div>
               </div>
               </div>
               {displayedTickets[user.id] &&
                 displayedTickets[user.id].map((ticket) => (
                   <div key={ticket.id} className="sub-main-item">
-                    {ticket.title}
+                  <CardItems ticket_status={ticket.status} ticket_priority={ticket.priority} ticket_name={ticket.id} ticket_title={ticket.title} username="" />
                   </div>
                 ))}
             </div>
@@ -171,11 +206,27 @@ const Card = () => {
         {groupingOption === 'priority' &&
           [0, 1, 2, 3, 4].map((priority) => (
             <div key={priority} className="sub-main-head">
-              {priorityLabels[priority]} ({displayedTickets[priority] ? displayedTickets[priority].length : 0} tickets)
+            <div className="sub-main-title">
+            <div>
+            {getPriorityIcon(priority)}
+            
+              <span className="st-title">{priorityLabels[priority]}</span> <span className="cnt">{displayedTickets[priority] ? displayedTickets[priority].length : 0} </span> 
+              </div>
+              <div className="hd-icons">
+                 <div className="icon-wrap">
+                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','marginRight':'5px'}}><path fill="none" d="M0 0h24v24H0z"></path><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>
+                 </div>
+                 <div className="icon-wrap">
+                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray','marginRight':'5px'}}><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path></svg>
+                 </div>
+              </div>
+              </div>
+          
               {displayedTickets[priority] &&
                 displayedTickets[priority].map((ticket) => (
                   <div key={ticket.id} className="sub-main-item">
-                    {ticket.title}
+                  
+                         <CardItems ticket_status={ticket.status} ticket_priority={5} ticket_name={ticket.id} ticket_title={ticket.title} username={getUsernameForTicket(ticket.userId)} />
                   </div>
                 ))}
             </div>
@@ -204,7 +255,7 @@ const Card = () => {
                 displayedTickets[status].map((ticket) => (
                   <div key={ticket.id} className="sub-main-item">
                   
-                         <CardItems ticket_priority={ticket.priority} ticket_name={ticket.id} ticket_title={ticket.title} username={getUsernameForTicket(ticket.userId)} />
+                         <CardItems ticket_status=""  ticket_priority={ticket.priority} ticket_name={ticket.id} ticket_title={ticket.title} username={getUsernameForTicket(ticket.userId)} />
                   </div>
                 ))}
             </div>
