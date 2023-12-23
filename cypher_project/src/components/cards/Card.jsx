@@ -23,14 +23,13 @@ const Card = () => {
   const groupAndSortTickets = (tickets, groupingOption, sortingOption) => {
     let adjustedTickets = [...tickets];
 
-    // Sorting
     if (sortingOption === 'priority') {
       adjustedTickets.sort((a, b) => b.priority - a.priority);
     } else if (sortingOption === 'title') {
       adjustedTickets.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    // Grouping
+ 
     if (groupingOption === 'user') {
       let groupedTickets = {};
       adjustedTickets.forEach((ticket) => {
@@ -147,20 +146,25 @@ const Card = () => {
     <div className="parent-cont">
     <div className="nav-head">
     <div className="btn-display">
-      <button onClick={toggleOptions}>Display Options</button>
+
+      <div className="display-wrap" onClick={toggleOptions}>
+      <div>    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M3.5 2h-1v5h1V2zm6.1 5H6.4L6 6.45v-1L6.4 5h3.2l.4.5v1l-.4.5zm-5 3H1.4L1 9.5v-1l.4-.5h3.2l.4.5v1l-.4.5zm3.9-8h-1v2h1V2zm-1 6h1v6h-1V8zm-4 3h-1v3h1v-3zm7.9 0h3.19l.4-.5v-.95l-.4-.5H11.4l-.4.5v.95l.4.5zm2.1-9h-1v6h1V2zm-1 10h1v2h-1v-2z"></path></svg></div>
+      Display
+      <div><svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg></div>
+      </div>
 
       {showOptions && (
-        <div>
-          <div>
-            Group by:
+        <div className="sub-group-item">
+          <div className="drop-item-group">
+            <span>Grouping</span>
             <select onChange={(e) => setGroupingOption(e.target.value)}>
               <option value="status">Status</option>
               <option value="user">User</option>
               <option value="priority">Priority</option>
             </select>
           </div>
-          <div>
-            Sort by:
+          <div className="drop-item-order">
+            <span>Ordering</span>
             <select onChange={(e) => setSortingOption(e.target.value)}>
               <option value="priority">Priority</option>
               <option value="title">Title</option>

@@ -1,17 +1,46 @@
 .parent-cont{
      background-color: #F4F5F8;
-
+     font-family: "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .nav-head{
+   
+   padding:0 1.5%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background: #fff;
+    height: 8vh;
 }
 
+.display-wrap{
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    border-radius: 6px;
+    padding: 0.25rem 0.4rem;
+    border: 2px solid #e6e7eb;
+    cursor: pointer;
+    color: #373737;
+    box-shadow: 0 0 8px 0 #0000001a;
+}
 
+.sub-group-item{
+    position: absolute;
 
+    flex-direction: column;
+    
+   
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+margin-top: 10px;
+    transition: max-height 0.3s ease-in-out;
+    background-color: #ffff;
+    border: 1px solid #e6e7eb;
+    box-shadow: 0 0 8px 0 #0000001a;
+}
 
 
 .main-card-header{
@@ -61,4 +90,52 @@
     border-radius: 50%;
     padding: 2px 5px;
     margin: 0 5px;
+}
+
+.drop-item-group{
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    justify-content: space-between;
+    font-size: 1rem;
+    padding-bottom: 10px;
+
+}
+.drop-item-group span{
+    color: #8D8D8D;
+}
+.drop-item-group select{
+    background-color: #ffff;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #373737;
+    padding: 0.2rem 2rem 0.2rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #e6e7eb;
+}
+
+.drop-item-order{
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+.drop-item-order span{
+    color: #8D8D8D;
+}
+.drop-item-order select{
+    background-color: #ffff;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #373737;
+    padding: 0.2rem 2rem 0.2rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #e6e7eb;
 }
