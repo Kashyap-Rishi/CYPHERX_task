@@ -1,9 +1,13 @@
 import './cardItems.css'
 import PropTypes from 'prop-types';
-
+import { useContext } from 'react';
+import ThemeContext from '../../context/theme/ThemeContext';
 const CardItems = (props) => {
-
+  const {theme}=useContext(ThemeContext);
 const prioritySymbolHandler=(priorityStage)=>{
+
+  
+
  
   switch(priorityStage){
     case 0:
@@ -23,7 +27,7 @@ const prioritySymbolHandler=(priorityStage)=>{
 
           case 3:
             return(
-           <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'style':'gray'}}><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path></svg>
+           <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray'}}><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path></svg>
                     );
 
             case 4:
@@ -67,13 +71,13 @@ const statusSymbolHandler = (statusStage) => {
     };
 
   return (
-    <div className="main-container">
+    <div className={theme?"main-container-dk":"main-container-lt"}>
         <div className="sub-cont">
             <div className="sub-hd">
                 <div className="sub-hd-tl"><span>{props.ticket_name}</span></div>
               {props.username!=""&&  <div className="sub-hd-logo">{props.username}</div>}
             </div>
-            <div className="sub-tl">
+            <div className={theme?"sub-tl-dk":"sub-tl-lt"}>
             {props.ticket_status!=""&&statusSymbolHandler(props.ticket_status)}
             <p>{props.ticket_title}</p></div>
             <div className="sub-desc">
@@ -86,7 +90,7 @@ const statusSymbolHandler = (statusStage) => {
             
             }
                 <div className="sub-desc-tag">
-                <div className="tag-wrapper">
+                <div className={theme?"tag-wrapper-dk":"tag-wrapper-lt"}>
                 <div className="tag-wrap-sym">
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 256 256" className="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style={{'color':'gray'}}><path d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"></path></svg>
                 </div>
