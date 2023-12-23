@@ -8,8 +8,13 @@ import ThemeContext from '../../context/theme/ThemeContext';
 const Card = () => {
   const {theme,toggleTheme}=useContext(ThemeContext);
   const data = useContext(DataContext);
-  const [groupingOption, setGroupingOption] = useState('status');
-  const [sortingOption, setSortingOption] = useState('priority');
+  const [groupingOption, setGroupingOption] = useState(
+    localStorage.getItem('groupingOption') || 'status'
+  );
+  const [sortingOption, setSortingOption] = useState(
+    localStorage.getItem('sortingOption') || 'priority'
+  );
+
   const [displayedTickets, setDisplayedTickets] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -19,6 +24,13 @@ const Card = () => {
       setDisplayedTickets(adjustedTickets);
     }
   }, [data, groupingOption, sortingOption]);
+
+  useEffect(() => {
+    localStorage.setItem('groupingOption', groupingOption);
+    localStorage.setItem('sortingOption', sortingOption);
+  }, [groupingOption, sortingOption]);
+
+
 
   const groupAndSortTickets = (tickets, groupingOption, sortingOption) => {
     let adjustedTickets = [...tickets];
