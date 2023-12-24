@@ -4,9 +4,19 @@ import DataContext from "../../context/data/DataContext";
 import CardItems from "../cardItems/CardItems";
 
 import ThemeContext from "../../context/theme/ThemeContext";
+
+
 const Card = () => {
+
+  //Theme context hook for dark and light mode
   const { theme, toggleTheme } = useContext(ThemeContext);
+
+
+  //Data context hook to retrieve data from the API
   const data = useContext(DataContext);
+
+
+  //Initialising grouping and ordering options and simultaneously storing last session data on browser
   const [groupingOption, setGroupingOption] = useState(
     localStorage.getItem("groupingOption") || "status"
   );
@@ -17,6 +27,8 @@ const Card = () => {
   const [displayedTickets, setDisplayedTickets] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
 
+
+  //Use Effect hook to render every time options are changed
   useEffect(() => {
     if (data) {
       const adjustedTickets = groupAndSortTickets(
@@ -28,20 +40,29 @@ const Card = () => {
     }
   }, [data, groupingOption, sortingOption]);
 
+
+  // To retrieve last session data from local storgae every time window reloads
   useEffect(() => {
     localStorage.setItem("groupingOption", groupingOption);
     localStorage.setItem("sortingOption", sortingOption);
   }, [groupingOption, sortingOption]);
 
+
+  //Grouping nad sorting logic
   const groupAndSortTickets = (tickets, groupingOption, sortingOption) => {
     let adjustedTickets = [...tickets];
 
+      //sorting data based on higher priority
     if (sortingOption === "priority") {
       adjustedTickets.sort((a, b) => b.priority - a.priority);
+
+      //sorting data comparing alphabets
     } else if (sortingOption === "title") {
       adjustedTickets.sort((a, b) => a.title.localeCompare(b.title));
     }
 
+
+    //Creating array and grouping tickets based on user option
     if (groupingOption === "user") {
       let groupedTickets = {};
       adjustedTickets.forEach((ticket) => {
@@ -52,6 +73,9 @@ const Card = () => {
         groupedTickets[userId].push(ticket);
       });
       return groupedTickets;
+
+
+    //Creating array and grouping tickets based on priority option
     } else if (groupingOption === "priority") {
       let groupedTickets = {};
       adjustedTickets.forEach((ticket) => {
@@ -62,6 +86,9 @@ const Card = () => {
         groupedTickets[priority].push(ticket);
       });
       return groupedTickets;
+
+ 
+    //Creating array and grouping tickets based on status option
     } else if (groupingOption === "status") {
       let groupedTickets = {};
       adjustedTickets.forEach((ticket) => {
@@ -76,21 +103,30 @@ const Card = () => {
 
     return adjustedTickets;
   };
+
+
+  //Function to get the name of first letter of user for icon
   const getUsernameForTicket = (ticketUserId) => {
     const user = data.users.find((user) => user.id === ticketUserId);
     return user ? user.name.split("")[0] : "Unknown User";
   };
 
+
+  //Display button
   const toggleOptions = () => {
     setShowOptions(!showOptions);
   };
 
+  //Handling error correctly when unable to fetch data from API
   if (!data) {
     return <div>Loading...</div>;
   }
 
+  //Creating an array of names according to priority based indexing
   const priorityLabels = ["No Priority", "Low", "Medium", "High", "Urgent"];
 
+
+  //Based on status prop it provides the corresponding svg based on that respective status 
   const getStatusIcon = (status) => {
     switch (status) {
       case "Backlog":
@@ -199,6 +235,9 @@ const Card = () => {
         return null;
     }
   };
+
+
+    //Based on priority prop it provides the corresponding svg based on that respective priority
   const getPriorityIcon = (priorityStage) => {
     console.log(priorityStage);
     switch (priorityStage) {
@@ -300,6 +339,12 @@ const Card = () => {
         );
     }
   };
+
+
+/* After all initial configurations code starts from here */
+
+
+
   return (
     <div className={theme ? "parent-cont-dk" : "parent-cont-lt"}>
       <div className={theme ? "nav-head-dk" : "nav-head-lt"}>
@@ -343,6 +388,8 @@ const Card = () => {
               </svg>
             </div>
           </div>
+
+
 
           {showOptions && (
             <div className={theme ? "sub-group-item-dk" : "sub-group-item-lt"}>
@@ -399,6 +446,11 @@ const Card = () => {
           )}
         </div>
       </div>
+
+
+
+{/* Displaying data based on grouping user */}
+
 
       <div className="main-card-header">
         {groupingOption === "user" &&
@@ -465,6 +517,12 @@ const Card = () => {
             </div>
           ))}
 
+
+
+{/* Displaying data based on grouping priority */}
+
+
+
         {groupingOption === "priority" &&
           [0, 1, 2, 3, 4].map((priority) => (
             <div key={priority} className="sub-main-head">
@@ -520,7 +578,7 @@ const Card = () => {
                   <div key={ticket.id} className="sub-main-item">
                     <CardItems
                       ticket_status={ticket.status}
-                      ticket_priority={5}
+                      ticket_priority={5} 
                       ticket_name={ticket.id}
                       ticket_title={ticket.title}
                       username={getUsernameForTicket(ticket.userId)}
@@ -529,6 +587,10 @@ const Card = () => {
                 ))}
             </div>
           ))}
+
+
+{/* Displaying data based on grouping status */}
+
 
         {groupingOption === "status" &&
           ["Backlog", "Todo", "In progress", "Done", "Cancelled"].map(
