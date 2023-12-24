@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import ThemeContext from "../../context/theme/ThemeContext";
 const CardItems = (props) => {
+
+    //Theme context hook for dark and light mode
   const { theme } = useContext(ThemeContext);
+
+
+  //Based on status prop it provides the corresponding svg based on that respective priority
   const prioritySymbolHandler = (priorityStage) => {
     switch (priorityStage) {
       case 0:
@@ -104,6 +109,9 @@ const CardItems = (props) => {
         );
     }
   };
+
+
+   //Based on priority prop it provides the corresponding svg based on that respective status
   const statusSymbolHandler = (statusStage) => {
     switch (statusStage) {
       case "Backlog":
@@ -217,16 +225,27 @@ const CardItems = (props) => {
           <div className="sub-hd-tl">
             <span>{props.ticket_name}</span>
           </div>
+
+             {/* Before displaying user logo it first checks whether it is empty.
+             The user logo will be empty in case of user grouping as it is not shown on card and is shown on header*/}
           {props.username != "" && (
             <div className="sub-hd-logo">{props.username}</div>
           )}
+
         </div>
         <div className={theme ? "sub-tl-dk" : "sub-tl-lt"}>
+
+            {/* Before displaying status logo it first checks whether it is empty.
+             The status logo will be empty in case of status grouping as it is not shown on card and is shown on header*/}
           {props.ticket_status != "" &&
             statusSymbolHandler(props.ticket_status)}
           <p>{props.ticket_title}</p>
         </div>
+
         <div className="sub-desc">
+
+              {/* Before displaying priority logo it first checks whether it <=4.
+             The priority logo will be empty in case of priority grouping as it is not shown on card and is shown on header*/}
           {props.ticket_priority != 5 && (
             <div className="sub-desc-pt">
               {prioritySymbolHandler(props.ticket_priority)}
